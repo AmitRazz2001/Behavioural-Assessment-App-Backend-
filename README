@@ -1,0 +1,34 @@
+## Overview
+Node.js + Express backend module for a behavioural assessment system.
+
+## Data Model
+- Assessment structure
+- Answer format
+- In-memory storage choice and rationale
+
+## Scoring Logic
+- How raw answers map to dimensions
+- Handling missing / invalid values
+
+## Reliability Checks
+- Identical answers check
+- Extreme answers check
+- Skipped items threshold
+
+## Share Payload
+- High-level scores only
+- No raw answers or internal flags
+
+## Compare Payload
+- Dimension-wise similarity/difference
+- Safe, non-sensitive output
+
+## Error Handling
+Centralized error-handling middleware.
+
+## API Testing
+Postman collection included.
+
+## How to Run
+npm install
+npm start OR node index.js
