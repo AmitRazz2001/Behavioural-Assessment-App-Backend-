@@ -1,34 +1,46 @@
 ## Overview
-Node.js + Express backend module for a behavioural assessment system.
+This project is a Node.js + Express backend module for a behavioural assessment system.
+Users submit answers to an assessment, the system scores those answers, runs basic reliability checks, and generates safe share and compare payloads without exposing raw responses.
 
 ## Data Model
-- Assessment structure
-- Answer format
-- In-memory storage choice and rationale
+An assessment is modeled as a set of questions mapped to behavioural dimensions (for example, communication or problem-solving).
+Each user submission contains a list of answers with numeric values.
+All data is stored in memory to keep the scope focused on business logic rather than persistence, as required for this exercise.
 
 ## Scoring Logic
-- How raw answers map to dimensions
-- Handling missing / invalid values
+User answers are grouped by their associated dimension.
+Each dimension score is calculated as the average of the valid answers mapped to it.
+Missing or out-of-range values are ignored or flagged to prevent invalid scores from affecting the result.
 
 ## Reliability Checks
-- Identical answers check
-- Extreme answers check
-- Skipped items threshold
+The system runs simple heuristic checks to determine whether a response is usable:
+- Identical answers check: flags responses where all answers have the same value.
+- Extreme answers check: flags responses with too many minimum or maximum values.
+- Skipped items check: flags responses where too many questions are unanswered.
+Each check produces a pass/fail result, and an overall usability status is derived from them.
 
 ## Share Payload
-- High-level scores only
-- No raw answers or internal flags
+The share payload contains only high-level dimension scores and summary labels.
+Raw answers, question-level data, and internal reliability flags are intentionally excluded.
+This ensures the payload is safe to share publicly and does not leak sensitive information.
 
 ## Compare Payload
-- Dimension-wise similarity/difference
-- Safe, non-sensitive output
+The compare payload highlights similarities and differences between two users at the dimension level.
+Only aggregated scores and relative comparisons are included.
+No raw answers or internal metadata are exposed, keeping the comparison safe and privacy-preserving.
 
 ## Error Handling
-Centralized error-handling middleware.
+The application uses centralized error-handling middleware to return consistent and meaningful error responses for invalid input and edge cases.
 
 ## API Testing
-Postman collection included.
+All public APIs were tested using Postman, including negative scenarios.
+A Postman collection is included in the repository for easy verification.
 
 ## How to Run
-npm install
-npm start OR node index.js
+Install dependencies and start the server:
+
+npm install  
+npm start  
+
+Alternatively:
+node index.js
