@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "868b74f4-2a4c-454a-b1f6-24774ce2c375",
+		"name": "Behavioural Assessment Backend APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34213844"
+	},
+	"item": [
+		{
+			"name": "Submit Assessment",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"user1\",\r\n  \"answers\": [\r\n    { \"itemId\": \"q1\", \"value\": 5 },\r\n    { \"itemId\": \"q2\", \"value\": 4 },\r\n    { \"itemId\": \"q3\", \"value\": 3 },\r\n    { \"itemId\": \"q4\", \"value\": 4 },\r\n    { \"itemId\": \"q5\", \"value\": 2 },\r\n    { \"itemId\": \"q6\", \"value\": 3 }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/assessment/submit"
+			},
+			"response": []
+		},
+		{
+			"name": "Welcome API",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/"
+			},
+			"response": []
+		},
+		{
+			"name": "Share User Profile",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/assessment/share/user2"
+			},
+			"response": []
+		},
+		{
+			"name": "Compare Profiles",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userA\": \"user1\",\r\n  \"userB\": \"user2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/assessment/compare"
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Assessment - Invalid Body",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"user1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/assessment/submit"
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Assessment - Out of Range",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"user1\",\r\n  \"answers\": [\r\n    { \"itemId\": \"q1\", \"value\": 10 }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/assessment/submit"
+			},
+			"response": []
+		},
+		{
+			"name": "Share Profile - User Not Found",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/assessment/share/user8"
+			},
+			"response": []
+		}
+	]
+}
